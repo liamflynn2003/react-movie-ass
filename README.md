@@ -1,2 +1,1 @@
-# react-movie-ass
-React Movie Assignment
+# react-movie-labs
