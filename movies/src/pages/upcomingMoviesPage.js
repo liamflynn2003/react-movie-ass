@@ -4,6 +4,7 @@ import React from "react";
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
 import AddToMustWatchIcon from '../components/cardIcons/addToMustWatch'
+import Watchlist from "../components/cardIcons/viewWatchlist";
 
 const UpcomingMoviesPage = (props) => {
 
@@ -23,7 +24,11 @@ const UpcomingMoviesPage = (props) => {
       title='Upcoming Movies'
       movies={movies}
       action={(movie) => {
-        return <AddToMustWatchIcon movie={movie} />
+        return (
+          <>
+          <AddToMustWatchIcon movie={movie} />
+          <Watchlist movie={movie} />
+          </>)
       }}
     />
   );

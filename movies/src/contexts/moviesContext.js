@@ -28,13 +28,13 @@ const MoviesContextProvider = (props) => {
     }
     setMustWatch(newMustWatch)
   };
-  // We will use this function in a later section
+
   const removeFromMustWatch = (movie) => {
-    setMustWatch( mustWatch.filter(
-      (mId) => mId !== movie.id
-    ) )
+    setMustWatch(mustWatch.filter((mId) => mId !== movie.id));
   };
-  // We will use this function in a later section
+  
+
+
   const removeFromFavorites = (movie) => {
     setFavorites( favorites.filter(
       (mId) => mId !== movie.id

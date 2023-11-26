@@ -27,8 +27,10 @@ const SiteHeader = ({ history }) => {
     { label: "Home", path: "/" },
     { label: "Favorites", path: "/movies/favorites" },
     { label: "Upcoming", path: "/movies/upcoming" },
-    { label: "Trending Movies", path: "/movies/trending" },
-    { label: "Top Rated Movies", path: "/movies/toprated"}
+    { label: "Trending", path: "/movies/trending" },
+    { label: "Top Rated", path: "/movies/toprated"},
+    { label: "Now Playing", path: "/movies/nowPlaying"},
+    { label: "Watchlist", path: "/movies/watchlist" },
   ];
 
   const handleMenuSelect = (pageURL) => {
@@ -41,7 +43,7 @@ const SiteHeader = ({ history }) => {
 
   return (
     <>
-      <AppBar position="fixed" color="secondary">
+      <AppBar position="fixed" color="primary">
         <Toolbar>
           <Typography variant="h4" sx={{ flexGrow: 1 }}>
             TMDB Client

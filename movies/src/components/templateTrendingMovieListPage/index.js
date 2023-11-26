@@ -3,11 +3,14 @@ import Header from "../headerMovieList";
 import FilterTrendingMoviesCard from "../filterTrendingMoviesCard";
 import MovieList from "../movieList";
 import Grid from "@mui/material/Grid";
+import Pagination from "../pagination";
+import PaginationFooter from "../paginationFooter";
 
 function TrendingMovieListPageTemplate({ dailyMovies, weeklyMovies, title, action }) {
   const [timeframeFilter, setTimeframeFilter] = useState("");
   const [nameFilter, setNameFilter] = useState("");
- 
+  const [currentPage, setCurrentPage] = useState(1);
+
   const handleChange = (type, value) => {
     if (type === "name"){ 
       setNameFilter(value);
@@ -24,7 +27,16 @@ function TrendingMovieListPageTemplate({ dailyMovies, weeklyMovies, title, actio
       movie.title.toLowerCase().includes(nameFilter.toLowerCase())
     );
   }
+
+    const itemsPerPage = 10;
+  const indexOfLastMovie = currentPage * itemsPerPage;
+  const indexOfFirstMovie = indexOfLastMovie - itemsPerPage;
+  const currentMovies = displayedMovies.slice(indexOfFirstMovie, indexOfLastMovie);
+  const totalPages = Math.ceil(displayedMovies.length / itemsPerPage);
   
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
   return (
     <Grid container sx={{ padding: '20px' }}>
       <Grid item xs={12}>
@@ -38,7 +50,13 @@ function TrendingMovieListPageTemplate({ dailyMovies, weeklyMovies, title, actio
           timeframeFilter={timeframeFilter}
         />
         </Grid>
-        <MovieList action={action} movies={displayedMovies}></MovieList>
+        <MovieList action={action} movies={currentMovies}></MovieList>
+        <PaginationFooter
+          itemsPerPage={itemsPerPage}
+          totalItems={displayedMovies.length}
+          currentPage={currentPage}
+          paginate={paginate}
+        />
       </Grid>
     </Grid>
   );
