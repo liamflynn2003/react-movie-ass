@@ -8,11 +8,16 @@ const PaginationFooter = ({ itemsPerPage, totalItems, currentPage, paginate }) =
 
   return (
     <Stack direction="row" justifyContent="center" alignItems="center" spacing={2} mt={4}>
-      <Button variant="contained" disabled={currentPage === 1} onClick={() => paginate(currentPage - 1)}>
+      <Button variant="contained" size="large" disabled={currentPage === 1} onClick={() => paginate(currentPage - 1)}>
         Previous
       </Button>
-      <Pagination count={totalPages} page={currentPage} onChange={(event, value) => paginate(value)} />
-      <Button variant="contained" disabled={currentPage === totalPages} onClick={() => paginate(currentPage + 1)}>
+      <Pagination
+        count={totalPages}
+        page={currentPage}
+        onChange={(event, value) => paginate(value)}
+        size="large"
+      />
+      <Button variant="contained" size="large" disabled={currentPage === totalPages} onClick={() => paginate(currentPage + 1)}>
         Next
       </Button>
     </Stack>
