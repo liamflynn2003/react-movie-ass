@@ -44,7 +44,7 @@ This repository contains the code for a React Web App which showcases informatio
 + /movies/watchlist - View movies on your watchlist
 + /movies/${s.id} - View similar movie details 
 
-## Independent learning (If relevant).
+## Independent learning
 
 +New tmdb endpoints: https://developer.themoviedb.org/reference/intro/getting-started
         
