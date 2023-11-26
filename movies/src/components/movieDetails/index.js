@@ -6,9 +6,13 @@ import StarRate from "@mui/icons-material/StarRate";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
+import React, { useState} from "react";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews";
+import { getSimilarMovies } from "../../api/tmdb-api";
+import Spinner from '../spinner';
+import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 
 const root = {
     display: "flex",
@@ -22,6 +26,16 @@ const chip = { margin: 0.5 };
 
 const MovieDetails = ({ movie }) => {  // Don't miss this!
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { data, error, isLoading, isError } = useQuery(['similarMovies', { id: movie.id }], getSimilarMovies);
+
+  if (isLoading) {
+    return <Spinner />
+  }
+
+  if (isError) {
+    return <h1>{error.message}</h1>
+  }  
+  const similarMovies = data.results;
 
   return (
     <>
@@ -68,6 +82,21 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
         {movie.production_companies.map((g) => (
           <li key={g.name}>
             <Chip label={g.name} sx={{...chip}} />
+          </li>
+        ))}
+      </Paper>
+      <Paper 
+        component="ul" 
+        sx={{...root}}
+      >
+        <li>
+          <Chip label="Similar Movies: " sx={{...chip}} color="primary" />
+        </li>
+        {similarMovies.map((s) => (
+          <li key={s.title}>
+            <Link to={`/movies/${s.id}`}>
+            <Chip label={s.title} sx={{...chip}} />
+            </Link>
           </li>
         ))}
       </Paper>
